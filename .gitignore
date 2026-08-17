@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.joblib
+*.pkl
+
+# Environment
+.env
+
+# Data files
+*.csv
+*.data
+uploads/
+
+# Node
+node_modules/
+build/
+
+# VS Code
+.vscode/
