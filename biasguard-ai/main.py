@@ -3,7 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from routers.bias_detect import router as bias_router
 from routers.bias_mitigate import router as mitigate_router
 from routers.predict import router as predict_router
-
+from lab_extraction.router import router as lab_router
+from clinical_standardization.router import router as clinical_router
+from clinical_compatibility.router import router as compatibility_router
+from disease_prediction.router import router as disease_router
 app = FastAPI(
     title="BiasGuard AI — Backend",
     description=(
@@ -30,8 +33,10 @@ app.add_middleware(
 app.include_router(bias_router)
 app.include_router(mitigate_router)
 app.include_router(predict_router)
-
-
+app.include_router(lab_router)
+app.include_router(clinical_router)
+app.include_router(compatibility_router)
+app.include_router(disease_router)
 @app.get("/", tags=["Health"])
 def root():
     return {

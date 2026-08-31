@@ -11,8 +11,15 @@ import shutil
 import uuid
 import json
 import httpx
-
+from dotenv import load_dotenv
+load_dotenv(
+    os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        ".env"
+    )
+)
 app = FastAPI(title="BiasGuard AI API")
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,11 +33,11 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def get_db_connection():
     return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='kiki',
-        database='biasguard_db',
-        port=3306,
+        host=os.getenv("DB_HOST", "localhost"),
+        user=os.getenv("DB_USER", "root"),
+        password=os.getenv("DB_PASSWORD", ""),
+        database=os.getenv("DB_NAME", "biasguard_db"),
+        port=int(os.getenv("DB_PORT", 3306)),
         cursorclass=pymysql.cursors.DictCursor
     )
 

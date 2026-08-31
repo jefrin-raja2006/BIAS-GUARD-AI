@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from app.config import settings
 
 engine = create_engine(
-    "mysql+pymysql://root:kiki@localhost:3306/biasguard_db",
+    f"mysql+pymysql://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}",
     pool_pre_ping=True,
     echo=settings.DEBUG
 )
